@@ -75,7 +75,6 @@ function buyFoodEfficientHousing() {
             'name': unlockedHousing[house],
             'ratio': ratio
         });
-        document.getElementById(unlockedHousing[house]).style.border = "1px solid #FFFFFF";
     }
     buildorder.sort(function (a, b) {
         return a.ratio - b.ratio;
@@ -89,7 +88,6 @@ function buyFoodEfficientHousing() {
     }
     //if we found something make it green and buy it
     if (bestfoodBuilding) {
-        document.getElementById(bestfoodBuilding).style.border = "1px solid #00CC01";
         safeBuyBuilding(bestfoodBuilding);
     }
 }
@@ -111,7 +109,6 @@ function buyGemEfficientHousing() {
         if (unlockedHousing[house] == "Gateway" && !canAffordBuilding('Gateway'))
             continue;
         obj[unlockedHousing[house]] = ratio;
-        document.getElementById(unlockedHousing[house]).style.border = "1px solid #FFFFFF";
     }
     var keysSorted = Object.keys(obj).sort(function (a, b) {
         return obj[a] - obj[b];
@@ -123,7 +120,6 @@ function buyGemEfficientHousing() {
         if (max === false) max = -1;
         if (game.buildings[keysSorted[best]].owned < max || max == -1) {
             bestBuilding = keysSorted[best];
-            document.getElementById(bestBuilding).style.border = "1px solid #00CC00";
             //WarpStation Cap:
             var skipWarp = false;
             if (getPageSetting('WarpstationCap') && bestBuilding == "Warpstation") {

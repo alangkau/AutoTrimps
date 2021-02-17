@@ -94,7 +94,7 @@ var equipmentList = {
         Equip: false
     }
 };
-var mapresourcetojob = {"food": "Farmer", "wood": "Lumberjack", "metal": "Miner", "science": "Scientist"};  //map of resource to jobs
+var mapresourcetojob = { "food": "Farmer", "wood": "Lumberjack", "metal": "Miner", "science": "Scientist" };  //map of resource to jobs
 
 //Returns the amount of stats that the equipment (or gym) will give when bought.
 function equipEffect(gameResource, equip) {
@@ -188,16 +188,16 @@ function evaluateEquipmentEfficiency(equipName) {
     //wall (don't buy any more equipment, buy prestige first)
     //Factor = 0 sets the efficiency to 0 so that it will be disregarded. if not, efficiency will still be somenumber that is cheaper,
     //      and the algorithm will get stuck on whatever equipment we have capped, and not buy other equipment.
-    if (game.jobs[mapresourcetojob[equip.Resource]].locked && (game.global.challengeActive != 'Metal')){
+    if (game.jobs[mapresourcetojob[equip.Resource]].locked && (game.global.challengeActive != 'Metal')) {
         //cap any equips that we haven't unlocked metal for (new/fresh game/level1/no helium code)
         Factor = 0;
         Wall = true;
     }
-//Detecting the liquification through liquimp
+    //Detecting the liquification through liquimp
     var isLiquified = (game.options.menu.liquification.enabled && game.talents.liquification.purchased && !game.global.mapsActive && game.global.gridArray && game.global.gridArray[0] && game.global.gridArray[0].name == "Liquimp");
-//Run a quick Time estimate and if we complete it in 25 seconds or less, use 1/10th of our cap just so we can continue (MODULES["equipment"].capDivisor=10;)
+    //Run a quick Time estimate and if we complete it in 25 seconds or less, use 1/10th of our cap just so we can continue (MODULES["equipment"].capDivisor=10;)
     var time = mapTimeEstimater();
-    var isQuick = (time!=0) && (time < 25000);
+    var isQuick = (time != 0) && (time < 25000);
     var cap = getPageSetting('CapEquip2');
     if ((isLiquified || isQuick) && cap > 0 && gameResource.level >= (cap / MODULES["equipment"].capDivisor)) {
         Factor = 0;
@@ -209,7 +209,7 @@ function evaluateEquipmentEfficiency(equipName) {
         Wall = true;
     }
     //WaitTill60 (skip58&59 + wait for breaking the planet reduction) (now default)
-    if (equipName != 'Gym' && game.global.world < 60 && game.global.world >= 58 && MODULES["equipment"].waitTill60){
+    if (equipName != 'Gym' && game.global.world < 60 && game.global.world >= 58 && MODULES["equipment"].waitTill60) {
         Wall = true;
     }
     //AlwaysLvl2 - Was AlwaysArmorLvl2 (now default)
@@ -218,13 +218,12 @@ function evaluateEquipmentEfficiency(equipName) {
     }
     //skip buying shields (w/ shieldblock) if we need gymystics
     if (equipName == 'Shield' && gameResource.blockNow &&
-        game.upgrades['Gymystic'].allowed - game.upgrades['Gymystic'].done > 0)
-        {
-            needGymystic = true;
-            Factor = 0;
-            Wall = true;
-            StatusBorder = 'orange';
-        }
+        game.upgrades['Gymystic'].allowed - game.upgrades['Gymystic'].done > 0) {
+        needGymystic = true;
+        Factor = 0;
+        Wall = true;
+        StatusBorder = 'orange';
+    }
     return {
         Stat: equip.Stat,
         Factor: Factor,
@@ -240,8 +239,8 @@ var Best;
 function autoLevelEquipment() {
     if (!(baseDamage > 0)) return;  //if we have no damage, why bother running anything? (this fixes weird bugs)
     //if((game.jobs.Miner.locked && game.global.challengeActive != 'Metal') || (game.jobs.Scientist.locked && game.global.challengeActive != "Scientist"))
-        //return;
-    resourcesNeeded = {"food": 0, "wood": 0, "metal": 0, "science": 0, "gems": 0};  //list of amount of resources needed for stuff we want to afford
+    //return;
+    resourcesNeeded = { "food": 0, "wood": 0, "metal": 0, "science": 0, "gems": 0 };  //list of amount of resources needed for stuff we want to afford
     Best = {};
     var keys = ['healthwood', 'healthmetal', 'attackmetal', 'blockwood'];
     for (var i = 0; i < keys.length; i++) {
@@ -253,7 +252,7 @@ function autoLevelEquipment() {
             Cost: 0
         };
     }
-//EQUIPMENT HAS ITS OWN DAMAGE CALC SECTION:
+    //EQUIPMENT HAS ITS OWN DAMAGE CALC SECTION:
     var enemyDamage = getEnemyMaxAttack(game.global.world + 1, 50, 'Snimp', 1.2);
     enemyDamage = calcDailyAttackMod(enemyDamage); //daily mods: badStrength,badMapStrength,bloodthirst
     var enemyHealth = getEnemyMaxHealth(game.global.world + 1);
@@ -270,19 +269,19 @@ function autoLevelEquipment() {
     }
 
     //below challenge multiplier not necessarily accurate, just fudge factors
-    if(game.global.challengeActive == "Toxicity") {
+    if (game.global.challengeActive == "Toxicity") {
         //ignore damage changes (which would effect how much health we try to buy) entirely since we die in 20 attacks anyway?
-        if(game.global.world < 61)
+        if (game.global.world < 61)
             enemyDamage *= 2;
         enemyHealth *= 2;
     }
-    if(game.global.challengeActive == 'Lead') {
+    if (game.global.challengeActive == 'Lead') {
         enemyDamage *= 2.5;
         enemyHealth *= 7;
     }
     var pierceMod = (game.global.brokenPlanet && !game.global.mapsActive) ? getPierceAmt() : 0;
     //change name to make sure these are local to the function
-    var enoughHealthE,enoughDamageE;
+    var enoughHealthE, enoughDamageE;
     const FORMATION_MOD_1 = game.upgrades.Dominance.done ? 2 : 1;
     //const FORMATION_MOD_2 = game.upgrades.Dominance.done ? 4 : 1;
     var numHits = MODULES["equipment"].numHitsSurvived;    //this can be changed.
@@ -293,13 +292,13 @@ function autoLevelEquipment() {
     var valid_max = max_zone <= 0 || game.global.world < max_zone;
     //asks if we can survive x number of hits in either D stance or X stance.
     enoughHealthE = !(doVoids && voidCheckPercent > 0) &&
-        (baseHealth/FORMATION_MOD_1 > numHits * (enemyDamage - baseBlock/FORMATION_MOD_1 > 0 ? enemyDamage - baseBlock/FORMATION_MOD_1 : enemyDamage * pierceMod)) &&
-        (!(valid_min && valid_max) || (baseHealth/2 > numHitsScry * (enemyDamage - baseBlock/2 > 0 ? enemyDamage - baseBlock/2 : enemyDamage * pierceMod)));
+        (baseHealth / FORMATION_MOD_1 > numHits * (enemyDamage - baseBlock / FORMATION_MOD_1 > 0 ? enemyDamage - baseBlock / FORMATION_MOD_1 : enemyDamage * pierceMod)) &&
+        (!(valid_min && valid_max) || (baseHealth / 2 > numHitsScry * (enemyDamage - baseBlock / 2 > 0 ? enemyDamage - baseBlock / 2 : enemyDamage * pierceMod)));
     enoughDamageE = (baseDamage * MODULES["equipment"].enoughDamageCutoff > enemyHealth);
     if (!enoughHealthE && MODULES["equipment"].equipHealthDebugMessage)
-        debug("Equipment module thought there was not enough health","equips");
+        debug("Equipment module thought there was not enough health", "equips");
 
-//PRESTIGE and UPGRADE SECTION:
+    //PRESTIGE and UPGRADE SECTION:
     for (var equipName in equipmentList) {
         var equip = equipmentList[equipName];
         // debug('Equip: ' + equip + ' EquipIndex ' + equipName);
@@ -307,7 +306,6 @@ function autoLevelEquipment() {
         // debug('Game Resource: ' + gameResource);
         if (!gameResource.locked) {
             var $equipName = document.getElementById(equipName);
-            $equipName.style.color = 'white';   //reset
             var evaluation = evaluateEquipmentEfficiency(equipName);
             // debug(equipName + ' evaluation ' + evaluation.StatusBorder);
             var BKey = equip.Stat + equip.Resource;
@@ -322,30 +320,6 @@ function autoLevelEquipment() {
             Best[BKey].Cost = evaluation.Cost;
             //add up whats needed:
             resourcesNeeded[equip.Resource] += Best[BKey].Cost;
-            
-            //Apply colors from before:
-            //white - Upgrade is not available
-            //yellow - Upgrade is not affordable (or capped)
-            //orange - Upgrade is affordable, but will lower stats
-            //red - Yes, do it now!
-            if (evaluation.Wall)
-                $equipName.style.color = 'yellow';
-            $equipName.style.border = '1px solid ' + evaluation.StatusBorder;
-
-            var $equipUpgrade = document.getElementById(equip.Upgrade);
-            if (evaluation.StatusBorder != 'white' && evaluation.StatusBorder != 'yellow' && $equipUpgrade)
-                $equipUpgrade.style.color = evaluation.StatusBorder;
-            if (evaluation.StatusBorder == 'yellow' && $equipUpgrade) 
-                $equipUpgrade.style.color = 'white';
-            if (equipName == 'Gym' && needGymystic) {
-                $equipName.style.color = 'white';
-                $equipName.style.border = '1px solid white';
-                if ($equipUpgrade) {
-                    $equipUpgrade.style.color = 'red';
-                    $equipUpgrade.style.border = '2px solid red';
-                }
-            }
-
 
             //Code is Spaced This Way So You Can Read It:
             if (evaluation.StatusBorder == 'red' && !(game.global.world < 60 && game.global.world >= 58 && MODULES["equipment"].waitTill60)) {
@@ -353,27 +327,26 @@ function autoLevelEquipment() {
                 var BuyArmorUpgrades = getPageSetting('BuyArmorUpgrades');
                 var DelayArmorWhenNeeded = getPageSetting('DelayArmorWhenNeeded');
                 if
-                (
-                    ( BuyWeaponUpgrades && equipmentList[equipName].Stat == 'attack' )
-                        ||
-                    ( BuyWeaponUpgrades && equipmentList[equipName].Stat == 'block' )
-                        ||
-                    ( BuyArmorUpgrades && equipmentList[equipName].Stat == 'health' &&
-                    //Only buy Armor prestiges when 'DelayArmorWhenNeeded' is on, IF:
+                    (
+                    (BuyWeaponUpgrades && equipmentList[equipName].Stat == 'attack')
+                    ||
+                    (BuyWeaponUpgrades && equipmentList[equipName].Stat == 'block')
+                    ||
+                    (BuyArmorUpgrades && equipmentList[equipName].Stat == 'health' &&
+                        //Only buy Armor prestiges when 'DelayArmorWhenNeeded' is on, IF:
                         (
-                            ( DelayArmorWhenNeeded && !shouldFarm)  // not during "Farming" mode
-                                ||                                                       //     or
-                            ( DelayArmorWhenNeeded && enoughDamageE) //  has enough damage (not in "Wants more Damage" mode)
-                                ||                                                       //     or
-                            ( DelayArmorWhenNeeded && !enoughDamageE && !enoughHealthE) // if neither enough dmg or health, then tis ok to buy.
-                                ||
-                            ( DelayArmorWhenNeeded && equipmentList[equipName].Resource == 'wood')
-                                ||
-                            ( !DelayArmorWhenNeeded) //or when its off.
+                            (DelayArmorWhenNeeded && !shouldFarm)  // not during "Farming" mode
+                            ||                                                       //     or
+                            (DelayArmorWhenNeeded && enoughDamageE) //  has enough damage (not in "Wants more Damage" mode)
+                            ||                                                       //     or
+                            (DelayArmorWhenNeeded && !enoughDamageE && !enoughHealthE) // if neither enough dmg or health, then tis ok to buy.
+                            ||
+                            (DelayArmorWhenNeeded && equipmentList[equipName].Resource == 'wood')
+                            ||
+                            (!DelayArmorWhenNeeded) //or when its off.
                         )
                     )
-                )
-                {
+                ) {
                     var upgrade = equipmentList[equipName].Upgrade;
                     if (upgrade != "Gymystic")
                         debug('Upgrading ' + upgrade + " - Prestige " + game.equipment[equipName].prestige, "equips", '*upload');
@@ -381,15 +354,11 @@ function autoLevelEquipment() {
                         debug('Upgrading ' + upgrade + " # " + game.upgrades[upgrade].allowed, "equips", '*upload');
                     buyUpgrade(upgrade, true, true);
                 }
-                else {
-                    $equipName.style.color = 'orange';
-                    $equipName.style.border = '2px solid orange';
-                }
             }
         }
     }
     //(same function)
-//LEVELING EQUIPMENT SECTION:
+    //LEVELING EQUIPMENT SECTION:
     preBuy();
     game.global.buyAmt = 1; //needed for buyEquipment()
     for (var stat in Best) {
@@ -398,12 +367,8 @@ function autoLevelEquipment() {
         if (eqName !== '') {
             var DaThing = equipmentList[eqName];
             if (eqName == 'Gym' && needGymystic) {
-                $eqName.style.color = 'white';
-                $eqName.style.border = '1px solid white';
                 continue;
             } else {
-                $eqName.style.color = Best[stat].Wall ? 'orange' : 'red';
-                $eqName.style.border = '2px solid red';
             }
             //If we are doing the MaxMapBonusAfterZone stuff, equipment should be upgraded to its cap.
             var maxmap = getPageSetting('MaxMapBonusAfterZone') && doMaxMapBonus;
@@ -422,7 +387,7 @@ function autoLevelEquipment() {
                 }
             }
             var aalvl2 = MODULES["equipment"].alwaysLvl2; //getPageSetting('AlwaysArmorLvl2');
-            if (getPageSetting('BuyArmor') && (DaThing.Stat == 'health') && aalvl2 && game.equipment[eqName].level < 2){
+            if (getPageSetting('BuyArmor') && (DaThing.Stat == 'health') && aalvl2 && game.equipment[eqName].level < 2) {
                 if (DaThing.Equip && !Best[stat].Wall && canAffordBuilding(eqName, null, null, true)) {
                     debug('Leveling equipment ' + eqName + " (AlwaysLvl2)", "equips", '*upload3');
                     buyEquipment(eqName, null, true);
