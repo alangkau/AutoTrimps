@@ -17,7 +17,7 @@ function safeBuyBuilding(building) {
     var oldBuy = preBuy2();
     //build 2 at a time if we have the mastery for it.
     //Note: Bypasses any "Max" caps by 1 if they are odd numbers and we can afford the 2nd one.
-    if (game.talents.doubleBuild.purchased) {
+    if (game.talents.doubleBuild && game.talents.doubleBuild.purchased) {
         game.global.buyAmt = 2;
         if (!canAffordBuilding(building)) {
             game.global.buyAmt = 1;
@@ -114,8 +114,8 @@ function buyGemEfficientHousing() {
         document.getElementById(unlockedHousing[house]).style.border = "1px solid #FFFFFF";
     }
     var keysSorted = Object.keys(obj).sort(function (a, b) {
-            return obj[a] - obj[b];
-        });
+        return obj[a] - obj[b];
+    });
     bestBuilding = null;
     //loop through the array and find the first one that isn't limited by max settings
     for (var best in keysSorted) {
@@ -144,19 +144,19 @@ function buyGemEfficientHousing() {
             var getcoord = getPageSetting('WarpstationCoordBuy');
             if (getcoord && skipWarp) {
                 var toTip = game.buildings.Warpstation;
-/*
-                //calc Cost
-                var warpMetalOK = getBuildingItemPrice(toTip, "metal", false, 1) * Math.pow(1 - game.portal.Resourceful.modifier, game.portal.Resourceful.level) / game.resources.metal.owned;
-                var warpGemsOK = getBuildingItemPrice(toTip, "gems", false, 1) * Math.pow(1 - game.portal.Resourceful.modifier, game.portal.Resourceful.level) / game.resources.gems.owned;
-                //var afford = Math.floor(Math.min(warpMetalOK,warpGemsOK));
-                if (warpMetalOK <= 1 && warpGemsOK <= 1) {
-*/
+                /*
+                                //calc Cost
+                                var warpMetalOK = getBuildingItemPrice(toTip, "metal", false, 1) * Math.pow(1 - game.portal.Resourceful.modifier, game.portal.Resourceful.level) / game.resources.metal.owned;
+                                var warpGemsOK = getBuildingItemPrice(toTip, "gems", false, 1) * Math.pow(1 - game.portal.Resourceful.modifier, game.portal.Resourceful.level) / game.resources.gems.owned;
+                                //var afford = Math.floor(Math.min(warpMetalOK,warpGemsOK));
+                                if (warpMetalOK <= 1 && warpGemsOK <= 1) {
+                */
                 if (canAffordBuilding("Warpstation")) {
                     var howMany = calculateMaxAfford(game.buildings["Warpstation"], true);
                     //calc trimps needed to next Coord
                     var needCoord = game.upgrades.Coordination.allowed - game.upgrades.Coordination.done > 0;
                     var coordReplace = (game.portal.Coordinated.level) ? (25 * Math.pow(game.portal.Coordinated.modifier, game.portal.Coordinated.level)).toFixed(3) : 25;
-                    if (!canAffordCoordinationTrimps()){
+                    if (!canAffordCoordinationTrimps()) {
                         var nextCount = (game.portal.Coordinated.level) ? game.portal.Coordinated.currentSend : game.resources.trimps.maxSoldiers;
                         var amtToGo = ((nextCount * 3) - game.resources.trimps.realMax());
                         //calc amount of trimps that warpstation increases by
@@ -164,7 +164,7 @@ function buyGemEfficientHousing() {
                         if (game.portal.Carpentry.level && toTip.increase.what == "trimps.max") increase *= Math.pow(1.1, game.portal.Carpentry.level);
                         if (game.portal.Carpentry_II.level && toTip.increase.what == "trimps.max") increase *= (1 + (game.portal.Carpentry_II.modifier * game.portal.Carpentry_II.level));
                         //do it
-                        if (amtToGo < increase*howMany)
+                        if (amtToGo < increase * howMany)
                             bestBuilding = "Warpstation";
                     }
                 }
@@ -197,7 +197,7 @@ function buyBuildings() {
         var skipGym = false;
         if (getPageSetting('DynamicGyms')) {
             //getBattleStats calculation comes from battlecalc.js and shows the tooltip-table block amount. calcBadGuyDmg is in that file also
-            if (!game.global.preMapsActive && getBattleStats("block", true) > calcBadGuyDmg(getCurrentEnemy(), null, true,true))
+            if (!game.global.preMapsActive && getBattleStats("block", true) > calcBadGuyDmg(getCurrentEnemy(), null, true, true))
                 skipGym = true;
         }
         //still buy gyms if we are farming for voids
@@ -228,7 +228,7 @@ function buyBuildings() {
         safeBuyBuilding('Tribute');
     }
     var targetBreed = parseInt(getPageSetting('GeneticistTimer'));
-//NURSERIES:
+    //NURSERIES:
     //NoNurseriesUntil', 'No Nurseries Until z', 'For Magma z230+ purposes. Nurseries get shut down, and wasting nurseries early on is probably a bad idea. Might want to set this to    230+ as well.'
     var nursminlvl = getPageSetting('NoNurseriesUntil');
     //Activate dynamic Nurseries to buy nurseries from NoNurseriesUntilZone up to portal before zone.
@@ -267,9 +267,9 @@ function buyBuildings() {
         var buyWithExtraGems = (!game.buildings.Warpstation.locked && nursCost * resomod < nwr * game.resources.gems.owned);
         if ((maxNursery > game.buildings.Nursery.owned || maxNursery == -1) &&
             (buyWithExtraGems ||
-             ((nursCost < nwr * warpCost || game.buildings.Warpstation.locked) &&
-              (nursCost < nwr * collCost || game.buildings.Collector.locked || !game.buildings.Warpstation.locked)))) {
-               safeBuyBuilding('Nursery');
+                ((nursCost < nwr * warpCost || game.buildings.Warpstation.locked) &&
+                    (nursCost < nwr * collCost || game.buildings.Collector.locked || !game.buildings.Warpstation.locked)))) {
+            safeBuyBuilding('Nursery');
         }
     }
     postBuy2(oldBuy);
