@@ -11,7 +11,7 @@ var zonePostpone = 0;   //additional postponement of the zone above.
 
 //Decide When to Portal
 function autoPortal() {
-    if(!game.global.portalActive) return;
+    if (!game.global.portalActive) return;
     var autoFinishDaily = (game.global.challengeActive == "Daily" && getPageSetting('AutoFinishDaily'));
     var autoFinishDailyZone = getPageSetting('AutoFinishDailyZone');
     if (!autoFinishDaily)
@@ -31,7 +31,7 @@ function autoPortal() {
                 //Multiply the buffer by (5) if we are in the middle of a zone   (allows portaling midzone if we exceed (5x) the buffer)
                 if (!aWholeNewWorld)
                     heliumHrBuffer *= MODULES["portal"].bufferExceedFactor;
-                var bufferExceeded = myHeliumHr < bestHeHr * (1-(heliumHrBuffer/100));
+                var bufferExceeded = myHeliumHr < bestHeHr * (1 - (heliumHrBuffer / 100));
                 if (bufferExceeded && game.global.world >= minZone) {
                     OKtoPortal = true;
                     if (aWholeNewWorld)
@@ -42,18 +42,18 @@ function autoPortal() {
                     OKtoPortal = false;
                 //Postpone Portal (and Actually Portal) code:
                 if (OKtoPortal && zonePostpone == 0) {
-                    zonePostpone+=1;
+                    zonePostpone += 1;
                     //lastHeliumZone = game.global.world;
-                    debug("My HeliumHr was: " + myHeliumHr + " & the Best HeliumHr was: " + bestHeHr + " at zone: " +  bestHeHrZone, "portal");
+                    debug("My HeliumHr was: " + myHeliumHr + " & the Best HeliumHr was: " + bestHeHr + " at zone: " + bestHeHrZone, "portal");
                     cancelTooltip();
-                    tooltip('confirm', null, 'update', '<b>Auto Portaling NOW!</b><p>Hit Delay Portal to WAIT 1 more zone.', 'zonePostpone+=1', '<b>NOTICE: Auto-Portaling in 10 seconds....</b>','Delay Portal');
+                    tooltip('confirm', null, 'update', '<b>Auto Portaling NOW!</b><p>Hit Delay Portal to WAIT 1 more zone.', 'zonePostpone+=1', '<b>NOTICE: Auto-Portaling in 10 seconds....</b>', 'Delay Portal');
                     //set up 2 things to happen after the timeout. close the tooltip:
-                    setTimeout(cancelTooltip,MODULES["portal"].timeout);
+                    setTimeout(cancelTooltip, MODULES["portal"].timeout);
                     //and check if we hit the confirm to postpone, and if not, portal.
-                    setTimeout(function(){
+                    setTimeout(function () {
                         if (zonePostpone >= 2)
                             return; //do nothing if we postponed.
-                        if (autoFinishDaily){
+                        if (autoFinishDaily) {
                             abandonDaily();
                             document.getElementById('finishDailyBtnContainer').style.display = 'none';
                         }
@@ -62,12 +62,12 @@ function autoPortal() {
                             doPortal(autoTrimpSettings.HeliumHourChallenge.selected);
                         else
                             doPortal();
-                    },MODULES["portal"].timeout+100);
+                    }, MODULES["portal"].timeout + 100);
                 }
             }
             break;
         case "Custom":
-            if ((game.global.world > getPageSetting('CustomAutoPortal')+autoFinishDailyZone) &&
+            if ((game.global.world > getPageSetting('CustomAutoPortal') + autoFinishDailyZone) &&
                 (!game.global.challengeActive || autoFinishDaily)) {
                 if (autoFinishDaily) {
                     abandonDaily();
@@ -92,7 +92,8 @@ function autoPortal() {
         case "Watch":
         case "Lead":
         case "Corrupted":
-            if(!game.global.challengeActive) {
+        case "Domination":
+            if (!game.global.challengeActive) {
                 doPortal(autoTrimpSettings.AutoPortal.selected);
             }
             break;
@@ -103,8 +104,8 @@ function autoPortal() {
 
 //Actually Portal.
 function doPortal(challenge) {
-    if(!game.global.portalActive) return;
-    if (getPageSetting('AutoMagmiteSpender2')==1) autoMagmiteSpender();
+    if (!game.global.portalActive) return;
+    if (getPageSetting('AutoMagmiteSpender2') == 1) autoMagmiteSpender();
     // From mainLoop
     if (getPageSetting('AutoHeirlooms2')) autoHeirlooms2(); //"Auto Heirlooms 2" (heirlooms.js)
     else if (getPageSetting('AutoHeirlooms')) autoHeirlooms();//"Auto Heirlooms"      (")
@@ -136,7 +137,7 @@ function doPortal(challenge) {
         }
     }
     //Regular Challenge:
-    else if(challenge) {
+    else if (challenge) {
         selectChallenge(challenge);
     }
     //Push He Data:
@@ -164,15 +165,16 @@ function findOutCurrentPortalLevel() {
     var leadCheck = false;
     var portalLevelName =
     {
-        "Balance" : 41,
-        "Decay" : 56,
-        "Electricity" : 82,
-        "Crushed" : 126,
-        "Nom" : 146,
-        "Toxicity" : 166,
-        "Lead" : 181,
-        "Watch" : 181,
-        "Corrupted" : 191
+        "Balance": 41,
+        "Decay": 56,
+        "Electricity": 82,
+        "Crushed": 126,
+        "Nom": 146,
+        "Toxicity": 166,
+        "Lead": 181,
+        "Watch": 181,
+        "Corrupted": 191,
+        "Domination": 216
     };
     var AP = getPageSetting("AutoPortal");
     switch (AP) {
@@ -188,5 +190,5 @@ function findOutCurrentPortalLevel() {
                 portalLevel = result;
             break;
     }
-    return {level:portalLevel, lead:leadCheck};
+    return { level: portalLevel, lead: leadCheck };
 }

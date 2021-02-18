@@ -28,7 +28,7 @@ function automationMenuInit() {
     newContainer.setAttribute("onmouseover", 'tooltip(\"Toggle Automapping\", \"customText\", event, \"Toggle automapping on and off.\")');
     newContainer.setAttribute("onmouseout", 'tooltip("hide")');
     var abutton = document.createElement("SPAN");
-    abutton.appendChild(document.createTextNode("Auto Maps"));    
+    abutton.appendChild(document.createTextNode("Auto Maps"));
     abutton.setAttribute("id", "autoMapLabel");
     var fightButtonCol = document.getElementById("battleBtnsColumn");
     newContainer.appendChild(abutton);
@@ -74,7 +74,7 @@ function automationMenuSettingsInit() {
     var autoSettings = document.createElement("DIV");
     autoSettings.id = "autoSettings";
     autoSettings.setAttribute("style", "display: none; max-height: 92.5vh;overflow: auto;");
-    autoSettings.setAttribute("class","niceScroll");
+    autoSettings.setAttribute("class", "niceScroll");
     settingsrow.appendChild(autoSettings);
 }
 automationMenuSettingsInit();
@@ -129,14 +129,14 @@ function toggleTab(evt, tabName) {
 function minimizeAllTabs() {
     // Get all elements with class="tabcontent" and hide them
     var tabcontent = document.getElementsByClassName("tabcontent");
-    for (var i = 0,len = tabcontent.length; i < len ; i++) {
+    for (var i = 0, len = tabcontent.length; i < len; i++) {
         tabcontent[i].style.display = "none";
     }
     // Get all elements with class="tablinks" and remove the class "active"
     var tablinks = document.getElementsByClassName("tablinks");
-    for (var i = 0,len = tablinks.length; i < len ; i++) {
+    for (var i = 0, len = tablinks.length; i < len; i++) {
         // if (!(tablinks[i].className.includes('minimize') || tablinks[i].className.includes('maximize') || tablinks[i].className.includes('tabclose') || tablinks[i].parentNode.id.includes('tabCore')))
-            // tablinks[i].style.display = "none";
+        // tablinks[i].style.display = "none";
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
 }
@@ -145,12 +145,12 @@ function minimizeAllTabs() {
 function maximizeAllTabs() {
     // Get all elements with class="tabcontent" and show them
     var tabcontent = document.getElementsByClassName("tabcontent");
-    for (var i = 0,len = tabcontent.length; i < len ; i++) {
+    for (var i = 0, len = tabcontent.length; i < len; i++) {
         tabcontent[i].style.display = "block";
     }
     // Get all elements with class="tablinks" and add the class "active"
     var tablinks = document.getElementsByClassName("tablinks");
-    for (var i = 0,len = tablinks.length; i < len ; i++) {
+    for (var i = 0, len = tablinks.length; i < len; i++) {
         tablinks[i].style.display = "block";
         if (!tablinks[i].className.includes(' active'))
             tablinks[i].className += " active";
@@ -196,7 +196,7 @@ function initializeAllTabs() {
     a_0.appendChild(document.createTextNode("-"));
     li_0.appendChild(a_0);
     li_0.setAttribute("style", "float:right!important;");
-    li_0.setAttribute("onmouseover",'tooltip("Minimize all tabs", "customText", event, "Minimize all AT settings tabs.")');
+    li_0.setAttribute("onmouseover", 'tooltip("Minimize all tabs", "customText", event, "Minimize all AT settings tabs.")');
     li_0.setAttribute("onmouseout", 'tooltip("hide")');
     //add a maximize button:
     var li_1 = document.createElement('li');
@@ -207,7 +207,7 @@ function initializeAllTabs() {
     a_1.appendChild(document.createTextNode("+"));
     li_1.appendChild(a_1);
     li_1.setAttribute("style", "float:right!important;");
-    li_1.setAttribute("onmouseover",'tooltip("Maximize all tabs", "customText", event, "Maximize all AT settings tabs.")');
+    li_1.setAttribute("onmouseover", 'tooltip("Maximize all tabs", "customText", event, "Maximize all AT settings tabs.")');
     li_1.setAttribute("onmouseout", 'tooltip("hide")');
     //add a minimize button:
     var li_2 = document.createElement('li');
@@ -218,7 +218,7 @@ function initializeAllTabs() {
     a_2.appendChild(document.createTextNode("x"));
     li_2.appendChild(a_2);
     li_2.setAttribute("style", "float:right!important;");
-    li_2.setAttribute("onmouseover",'tooltip("Exit (duplicate)", "customText", event, "Closes/toggles/hides AutoTrimps (just a UI shortcut)")');
+    li_2.setAttribute("onmouseover", 'tooltip("Exit (duplicate)", "customText", event, "Closes/toggles/hides AutoTrimps (just a UI shortcut)")');
     li_2.setAttribute("onmouseout", 'tooltip("hide")');
     addtabsUL.appendChild(li_2);    //close
     addtabsUL.appendChild(li_1);    //max
@@ -237,7 +237,7 @@ function initializeAllSettings() {
 
 
 
-//CORE:
+    //CORE:
     //Line1:
     createSetting('ManualGather2', ['Gather/Build OFF', 'Auto Gather/Build', 'Science Research OFF', 'Auto Gather/Build #2'], '4-Way Button. Auto Gathering of Food,Wood,Metal(w/turkimp) & Science. Auto speed-Builds your build queue. Now able to turn science researching off for the achievement Reach Z120 without using manual research. The decision between AutoGather 1 or 2 is up to your own discretion and they should be similar.', 'multitoggle', 1, null, "Core");
     createSetting('BuyUpgrades', 'Buy Upgrades', 'Autobuy non equipment Upgrades', 'boolean', true, null, "Core");
@@ -253,13 +253,13 @@ function initializeAllSettings() {
     createSetting('AutoFinishDailyZone', 'Finish Daily Zone Mod', 'Finish Daily by this # of zones earlier/later than your regular Custom AutoPortal zone or your Helium Dont Portal Before zone. When Auto Finish Daily is on. Tip: Tune your value of He/HrDontPortalBefore to suit the daily, and then tune this. Can accept negative numbers for earlier, ie: -7 means portal 7 zones earlier than normal. Can also use positive numbers to DELAY portaling for later. When used with He/Hr AutoPortal, the number of zones early does not FORCE end the daily at that zone, only ALLOW it to end that early: it will Always end when your HE/hr drops enough to trigger the portal. <b>Use 0 to disable.</b>', 'valueNegative', 0, null, 'Core');
     createSetting('FinishC2', 'Finish Challenge2', 'Finish / Abandon Challenge2 (any) when this zone is reached, if you are running one. For manual use. Recommended: Zones ending with 0 for most challenges. Disable with -1.', 'value', -1, null, 'Core');
     if (game.worldUnlocks.easterEgg)
-    createSetting('AutoEggs', 'AutoEggs', 'Click easter egg if it exists, upon entering a new zone. Warning: Quite overpowered. Please solemnly swear that you are up to no good.', 'boolean', false, null, 'Core');
+        createSetting('AutoEggs', 'AutoEggs', 'Click easter egg if it exists, upon entering a new zone. Warning: Quite overpowered. Please solemnly swear that you are up to no good.', 'boolean', false, null, 'Core');
     createSetting('ManualCoords', 'Don\'t buy Coords', 'Enable it if you know what you\'re doing, disable it if you don\'t know what you\'re doing. For when manually handling coords means a lot on challenges like Trapper.', 'boolean', false, null, 'Core');
     //NewLine3
-    document.getElementById('ManualCoords').parentNode.insertAdjacentHTML('afterend','<br>');
-    createSetting('AutoPortal', 'Auto Portal', 'Automatically portal. Will NOT auto-portal if you have a challenge active, the challenge setting dictates which challenge it will select for the next run. All challenge settings will portal right after the challenge ends, regardless. Helium Per Hour only <b>portals at cell 1</b> of the first level where your He/Hr went down even slightly compared to the current runs Best He/Hr. Take note, there is a Buffer option, which is like a grace percentage of how low it can dip without triggering. Setting a buffer will portal mid-zone if you exceed 5x of the buffer.  CAUTION: Selecting He/hr may immediately portal you if its lower-(use Pause AutoTrimps button to pause the script first to avoid this)', 'dropdown', 'Off', ['Off', 'Helium Per Hour', 'Balance', 'Decay', 'Electricity', 'Life', 'Crushed', 'Nom', 'Toxicity', 'Watch', 'Lead', 'Corrupted', 'Custom'], "Core");
+    document.getElementById('ManualCoords').parentNode.insertAdjacentHTML('afterend', '<br>');
+    createSetting('AutoPortal', 'Auto Portal', 'Automatically portal. Will NOT auto-portal if you have a challenge active, the challenge setting dictates which challenge it will select for the next run. All challenge settings will portal right after the challenge ends, regardless. Helium Per Hour only <b>portals at cell 1</b> of the first level where your He/Hr went down even slightly compared to the current runs Best He/Hr. Take note, there is a Buffer option, which is like a grace percentage of how low it can dip without triggering. Setting a buffer will portal mid-zone if you exceed 5x of the buffer.  CAUTION: Selecting He/hr may immediately portal you if its lower-(use Pause AutoTrimps button to pause the script first to avoid this)', 'dropdown', 'Off', ['Off', 'Helium Per Hour', 'Balance', 'Decay', 'Electricity', 'Life', 'Crushed', 'Nom', 'Toxicity', 'Watch', 'Lead', 'Corrupted', 'Domination', 'Custom'], "Core");
     //document.getElementById("AutoPortal").style="font-size: 1.0vw;";    //fit it on 1 line.
-    createSetting('HeliumHourChallenge', 'Portal Challenge', 'Automatically portal into this challenge when using helium per hour or custom autoportal. Custom portals after cell 100 of the zone specified. ', 'dropdown', 'None', ['None', 'Balance', 'Decay', 'Electricity', 'Life', 'Crushed', 'Nom', 'Toxicity', 'Watch', 'Lead', 'Corrupted'], "Core");
+    createSetting('HeliumHourChallenge', 'Portal Challenge', 'Automatically portal into this challenge when using helium per hour or custom autoportal. Custom portals after cell 100 of the zone specified. ', 'dropdown', 'None', ['None', 'Balance', 'Decay', 'Electricity', 'Life', 'Crushed', 'Nom', 'Toxicity', 'Watch', 'Lead', 'Corrupted', 'Domination'], "Core");
     //document.getElementById("HeliumHourChallengeLabel").innerHTML = "Portal Challenge:";    //fit it on 1 line.
     createSetting('CustomAutoPortal', 'Custom Portal', 'Automatically portal AFTER clearing this level.(ie: setting to 200 would portal when you first reach level 201)', 'value', '999', null, "Core");
     createSetting('HeHrDontPortalBefore', 'Don\'t Portal Before', 'Do NOT allow Helium per Hour AutoPortal setting to portal BEFORE this level is reached. It is an additional check that prevents drops in helium/hr from triggering autoportal. Set to 0 or -1 to completely disable this check. (only shows up with Helium per Hour set)', 'value', '999', null, "Core");
@@ -267,14 +267,14 @@ function initializeAllSettings() {
     createSetting('PauseScript', 'Pause AutoTrimps', 'Pause AutoTrimps Script (not including the graphs module)', 'boolean', null, null, 'Core');
     //code to locate the pause button at lower right
     var $pauseScript = document.getElementById('PauseScript');
-    $pauseScript.parentNode.style.setProperty('float','right');
-    $pauseScript.parentNode.style.setProperty('margin-right','1vw');
-    $pauseScript.parentNode.style.setProperty('margin-left','0');
+    $pauseScript.parentNode.style.setProperty('float', 'right');
+    $pauseScript.parentNode.style.setProperty('margin-right', '1vw');
+    $pauseScript.parentNode.style.setProperty('margin-left', '0');
 
 
 
 
-//Buildings
+    //Buildings
     createSetting('BuyStorage', 'Buy Storage', 'Will buy storage when resource is almost full. (like AutoStorage, even anticipates Jestimp)', 'boolean', true, null, "Buildings");
     createSetting('BuyBuildings', 'Buy Buildings', 'Will buy non storage buildings as soon as they are available', 'boolean', true, null, "Buildings");
     createSetting('WarpstationCap', 'Warpstation Cap', 'Do not level Warpstations past Basewarp+DeltaGiga **. Without this, if a Giga wasnt available, it would level infinitely (wastes metal better spent on prestiges instead.) **The script bypasses this cap each time a new giga is bought, when it insta-buys as many as it can afford (since AT keeps available metal/gems to a low, overbuying beyond the cap to what is affordable at that first moment is not a bad thing). ', 'boolean', true, null, 'Buildings');
@@ -302,7 +302,7 @@ function initializeAllSettings() {
 
 
 
-//Jobs
+    //Jobs
     createSetting('BuyJobs', 'Buy Jobs', 'Buys jobs based on ratios configured below. CAUTION: you cannot manually assign jobs with this. Toggle if you need to.', 'boolean', true, null, "Jobs");
     createSetting('WorkerRatios', 'Auto Worker Ratios', 'Automatically changes worker ratios based on current progress. WARNING: overrides worker ratio settings. Settings: 1/1/1 up to 300k trimps, 3/3/5 up to 3mil trimps, then 3/1/4 above 3 mil trimps, then 1/1/10 above 1000 tributes, then 1/2/22 above 1500 tributes, then 1/12/12 above 3000 tributes.', 'boolean', true, null, "Jobs");
     createSetting('AutoMagmamancers', 'Auto Magmamancers', 'Auto Magmamancer Management. Hires Magmamancers when the Current Zone time goes over 10 minutes. Does a one-time spend of at most 10% of your gem resources. Every increment of 10 minutes after that repeats the 10% hiring process. Magmamancery mastery is accounted for, with that it hires them at 5 minutes instead of 10. Disclaimer: May negatively impact Gem count.', 'boolean', true, null, 'Jobs');
@@ -319,7 +319,7 @@ function initializeAllSettings() {
 
 
 
-//GEAR:
+    //GEAR:
     createSetting('BuyArmor', 'Buy Armor Levels', 'Auto-Buy/Level-Up the most cost efficient armor available. ', 'boolean', true, null, "Gear");
     createSetting('BuyArmorUpgrades', 'Buy Armor Prestiges', '(Prestiges) & Gymystic. Will buy the most efficient armor upgrade available. ', 'boolean', true, null, "Gear");
     createSetting('BuyWeapons', 'Buy Weapon Levels', 'Auto-Buy/Level-Up the most cost efficient weapon available. ', 'boolean', true, null, "Gear");
@@ -330,7 +330,7 @@ function initializeAllSettings() {
     //Make a backup of the prestige setting: backup setting grabs the actual value of the primary setting any time it is changed, (line 784 of the function settingChanged())
     var lastSetting = autoTrimpSettings["PrestigeBackup"];
     autoTrimpSettings["PrestigeBackup"] = {
-        selected: (lastSetting != undefined ? lastSetting.selected : autoTrimpSettings["Prestige"].selected ) || "Off",
+        selected: (lastSetting != undefined ? lastSetting.selected : autoTrimpSettings["Prestige"].selected) || "Off",
         id: "PrestigeBackup",
         name: "PrestigeBackup"
     };
@@ -344,9 +344,9 @@ function initializeAllSettings() {
 
 
 
-//AutoMaps + VoidMaps settings:
-//Could combine automaps and run unique maps into one 3 way toggle: Automaps on, Non-unique maps only, Automaps off.
-    createSetting('AutoMaps', ["Auto Maps Off","Auto Maps","Auto Maps No Unique"], 'Recommended. Automatically run maps to progress. Very Important. Has multiple modes: <b>Prestige, Voids, Want more Damage, Want more Health, Want Health & Damage, and Farming.</b>Prestige takes precedence and does equal level maps until it gets what is needed as per Autotrimps Prestige dropdown setting. Voids is self explanatory: use the Void Difficulty Check setting to control the amount of farming. If \'want more damage\', it will only do 10 maps for 200% mapbonus damage bonus. If \'Farming\', it does maps beyond 10 if the displayed number is over >16x. \'Want more health[or and damage]\' is basically just a status message telling you need more health, theres not much that can be done besides tell AutoLevelEquipment to keep buying stuff. If you \'want health\' but your damage is OK to continue, invest in more HP perks.<hr>Unique Maps are run automatically unless disabled.<br><b>Uniques Required to auto-run The Wall and Dimension of Anger.</b> Also Required for challenges: Electricity, Mapocalypse, Meditate, and Crushed (etc) to complete their AutoPortal. <p> Maps/Levels: <br>The Block - 12<br>The Wall - 16<br>Dimension of Anger - 21<br>Trimple Of Doom - 34<br>The Prison - 82<br>Bionic Wonderland (only during Crushed) @ 127<br><b>NOTE:</b> This should generally be on.<br><B>NOTE:</B> Run Bionic Before Spire prevents the setting of Unique. <br><b>NOTICE:</b> This does <b>NOT</b> auto-run all your Bionics according to your lack of Robotrimp status or whether you pass a certain level (yet).', 'multitoggle', 1, null, "Maps");
+    //AutoMaps + VoidMaps settings:
+    //Could combine automaps and run unique maps into one 3 way toggle: Automaps on, Non-unique maps only, Automaps off.
+    createSetting('AutoMaps', ["Auto Maps Off", "Auto Maps", "Auto Maps No Unique"], 'Recommended. Automatically run maps to progress. Very Important. Has multiple modes: <b>Prestige, Voids, Want more Damage, Want more Health, Want Health & Damage, and Farming.</b>Prestige takes precedence and does equal level maps until it gets what is needed as per Autotrimps Prestige dropdown setting. Voids is self explanatory: use the Void Difficulty Check setting to control the amount of farming. If \'want more damage\', it will only do 10 maps for 200% mapbonus damage bonus. If \'Farming\', it does maps beyond 10 if the displayed number is over >16x. \'Want more health[or and damage]\' is basically just a status message telling you need more health, theres not much that can be done besides tell AutoLevelEquipment to keep buying stuff. If you \'want health\' but your damage is OK to continue, invest in more HP perks.<hr>Unique Maps are run automatically unless disabled.<br><b>Uniques Required to auto-run The Wall and Dimension of Anger.</b> Also Required for challenges: Electricity, Mapocalypse, Meditate, and Crushed (etc) to complete their AutoPortal. <p> Maps/Levels: <br>The Block - 12<br>The Wall - 16<br>Dimension of Anger - 21<br>Trimple Of Doom - 34<br>The Prison - 82<br>Bionic Wonderland (only during Crushed) @ 127<br><b>NOTE:</b> This should generally be on.<br><B>NOTE:</B> Run Bionic Before Spire prevents the setting of Unique. <br><b>NOTICE:</b> This does <b>NOT</b> auto-run all your Bionics according to your lack of Robotrimp status or whether you pass a certain level (yet).', 'multitoggle', 1, null, "Maps");
     createSetting('DynamicSiphonology', 'Dynamic Siphonology', 'Recommended Always ON. Use the right level of siphonology based on your damage output. IE: Only uses  siphonology if you are weak. With this OFF it means it ALWAYS uses the lowest siphonology map you can create. Siphonology is a perk you get at level 115-125ish, and means you receive map bonus stacks for running maps below your current zone - Up to 3 zones below (1 per perk level).', 'boolean', true, null, 'Maps');
     createSetting('PreferMetal', 'Prefer Metal Maps', 'ADVANCED: Always prefer metal maps, intended for manual use, such as pre-spire farming. Remember to turn it back off after you\'re done farming! Usually helps for pre-spire. Use on x90-x99 zones.', 'boolean', false, null, 'Maps');
     createSetting('MaxMapBonusAfterZone', 'Max MapBonus After', 'Always gets Max Map Bonus from this zone on. (inclusive and after).<br><b>NOTE:</b> Set -1 to disable entirely (default). Set 0 to use it always.<br><b>Advanced:</b>User can set a lower number than the default 10 maps with the AT hidden console command: MODULES[\\"maps\\"].maxMapBonusAfterZ = 9;', 'value', '-1', null, 'Maps');
@@ -373,7 +373,7 @@ function initializeAllSettings() {
 
 
 
-//Combat
+    //Combat
     //Subsection1Line1
     createSetting('BetterAutoFight', ['Better AutoFight OFF', 'Better Auto Fight 1', 'Better Auto Fight 2'], '3-Way Button, Recommended. Will automatically handle fighting. The decision between BetterAutoFight 1 or 2 is up to your own discretion. The new BAF#2 does: A)Click fight anyway if we are dead and stuck in a loop due to Dimensional Generator and we can get away with adding time to it.(RemainingTime + ArmyAdd.Time &lt; GeneTimer) and B) Clicks fight anyway if we are dead and have &gt;=31 NextGroupTimer and deal with the consequences by firing genetecists afterwards. WARNING: If you autoportal with BetterAutoFight disabled, the game sits there doing nothing until you click FIGHT. (not good for afk) ', 'multitoggle', 1, null, "Combat");
     createSetting('AutoStance', ['Auto Stance OFF', 'Auto Stance 1', 'Auto Stance 2'], 'Automatically swap stances to avoid death. The decision between AutoStance 1 or 2 is up to your own discretion and they should be similar. ', 'multitoggle', 1, null, "Combat");
@@ -386,7 +386,7 @@ function initializeAllSettings() {
 
 
 
-//Scryer
+    //Scryer
     createSetting('UseScryerStance', 'Use Scryer Stance', '<b>MASTER BUTTON</b> Stay in Scryer stance in z181 and above (Overrides Autostance). Falls back to regular Autostance when not in use (so leave that on). Get 2x resources or Dark Essence. <u>All other buttons have no effect if this one is off.</u>', 'boolean', true, null, 'Scryer');
     createSetting('ScryerUseWhenOverkill', 'Use When Overkill', 'Use when we can Overkill in S stance, for double loot with no speed penalty. Recommend this be on. <b>NOTE:</b> This being on, and being able to overkill in S will override ALL other settings <u>(Except never use in spire)</u>. This is a boolean logic shortcut that disregards all the other settings including Min and Max Zone. If you ONLY want to use S during Overkill, as a workaround: turn this on and Min zone: to 9999 and everything else off(red). ', 'boolean', true, null, 'Scryer');
     createSetting('ScryerMinZone', 'Min Zone', 'Minimum zone to start using scryer in.(inclusive) Recommend:(60 or 181). This needs to be On & Valid for options other than Overkill to work. Tip: Use 9999 to disable all other Non-Overkill scryer usage.', 'value', '181', null, 'Scryer');
@@ -404,7 +404,7 @@ function initializeAllSettings() {
 
 
 
-// Dimensional Generator settings:
+    // Dimensional Generator settings:
     createSetting('UseAutoGen', ['Auto Generator OFF', 'Auto Generator ON'], '<b>MASTER BUTTON</b> Dynamically switch generator modes. Required for the following mode management configurations to work. The Dimensional Generator is a building unlocked in The Magma, from z230.', 'multitoggle', 0, null, 'Magma');
     createSetting('AutoGen2', ['Default', 'Microtick', 'Max Cap', 'Overclock'], 'Before Z is reached, Microtick and Max Cap will switch between [Hybrid / Gain Fuel] to get EXACTLY one / FULL stacks of Capacity (not Storage) before using [Gain Mi]. Default will respect whatever you set it to and won\'t fiddle with it unless challenge overriding is on. Overclock will Gain Fuel until Z.', 'multitoggle', 2, null, 'Magma');
     createSetting('AutoGen2End', 'End Early Mode Z', 'On and after Z, be done with the mode we start with and switch to the final mode. -1 to disable.', 'value', 300, null, 'Magma');
@@ -422,14 +422,14 @@ function initializeAllSettings() {
 
 
 
-//Heirloom Settings
+    //Heirloom Settings
     createSetting('AutoHeirlooms', 'Auto Heirlooms', 'Automatically evaluate and carry the best heirlooms, and recommend upgrades for equipped items. AutoHeirlooms will only change carried items when the heirlooms window is not open. Carried items will be compared and swapped with the types that are already carried. If a carry spot is empty, it will be filled with the best shield (if available). Evaluation is based ONLY on the following mods (listed in order of priority, high to low): Void Map Drop Chance/Trimp Attack, Crit Chance/Crit Damage, Miner Efficiency/Metal Drop, Gem Drop/Dragimp Efficiency, Farmer/Lumberjack Efficiency. For the purposes of carrying, rarity trumps all of the stat evaluations. Empty mod slots are valued at the average value of the best missing mod.', 'boolean', false, null, "Heirlooms");
     createSetting('AutoHeirlooms2', 'Auto Heirlooms2', 'IMPORTANT SETTING. New algorithm for Heirlooms. While enabled, the old AutoHeirlooms algorithm will be disabled (the button will stay lit or you can turn that one off). CAUTION: Turning this on will immediately re-sort your heirlooms according to the new algorithm, and turning it off again DOES revert to the original algorithm even though it may NOT have a visible result on your heirlooms. (fyi: This lack of action highlights one of the problems with the old one.) ', 'boolean', false, null, 'Heirlooms');
     createSetting('AutoUpgradeHeirlooms', 'Auto Upgrade Heirlooms', 'Automatically buys the upgrades the script advises for the Equipped shield and staff, until we are out of nullifium.', 'boolean', false, null, 'Heirlooms');
 
 
 
-//Golden Upgrade Strategies:
+    //Golden Upgrade Strategies:
     createSetting('AutoGoldenUpgrades', 'AutoGoldenUpgrades', 'IMPORTANT SETTING. Automatically Buy the specified Golden Upgrades as they become available. Faster than vanilla. <b>NOTE:</b> Void setting unlocks more settings: goldStrat, goldAlternating, goldZone and goldNoBattle. <b>New:</b> Void also has a \\"Max then Helium\\" setting so you can get the perfect 60% Voids then Helium. More buttons will become visible when you make selections.', 'dropdown', 'Void', ["Off", "Helium", "Battle", "Void"], 'Golden');
     createSetting('goldStrat', 'Strategy', 'VOID ONLY: After max Void golden upgrades, alternate between buying helium and battle upgrades. Or Choose a Zone to switch over completely at (zones lower than X will buy only battle, and zones higher than X only helium). Battle can be disabled completely with the goldNoBattle button. <b>MAX THEN HELIUM </b> setting so you can get the perfect 60% Voids then Helium', 'dropdown', 'Max then Helium', ["Off", "Alternating", "Zone", "Max then Helium"], 'Golden');
     createSetting('goldAlternating', 'GU VOID: Alternating', 'Buy a helium upgrade after X-1 battle upgrades have been purchased', 'value', '2', null, 'Golden');
@@ -438,7 +438,7 @@ function initializeAllSettings() {
 
 
 
-// Nature settings:
+    // Nature settings:
     createSetting('AutoNatureTokens', 'Spend Nature Tokens', '<b>MASTER BUTTON</b> Automatically spend or convert nature tokens.', 'boolean', false, null, 'Nature');
     createSetting('AutoPoison', 'Poison', 'Spend/convert Poison tokens', 'dropdown', 'Off', ['Off', 'Empowerment', 'Transfer', 'Convert to Wind', 'Convert to Ice', 'Convert to Both'], 'Nature');
     createSetting('AutoWind', 'Wind', 'Spend/convert Wind tokens', 'dropdown', 'Off', ['Off', 'Empowerment', 'Transfer', 'Convert to Poison', 'Convert to Ice', 'Convert to Both'], 'Nature');
@@ -446,16 +446,16 @@ function initializeAllSettings() {
 
 
 
-//Display settings:
+    //Display settings:
     //Subsection1Line1
     createSetting('EnhanceGrids', 'Enhance Grids', 'Apply slight visual enhancements to world and map grids that highlights with drop shadow all the exotic, powerful, skeletimps and other special imps.', 'boolean', false, null, 'Display');
     createSetting('EnableAFK', 'Go AFK Mode', '(Action Button). Go AFK uses a Black Screen, and suspends ALL the Trimps GUI visual update functions (updateLabels) to improve performance by not doing unnecessary stuff. This feature is primarily just a CPU and RAM saving mode. Everything will resume when you come back and press the Back button. Console debug output is also disabled. The blue color means this is not a settable setting, just a button. You can now also click the Zone # (World Info) area to go AFK now.', 'action', 'MODULES["performance"].EnableAFKMode()', null, 'Display');
-    document.getElementById('battleSideTitle').setAttribute('onclick','MODULES["performance"].EnableAFKMode()');
+    document.getElementById('battleSideTitle').setAttribute('onclick', 'MODULES["performance"].EnableAFKMode()');
     document.getElementById('battleSideTitle').setAttribute('onmouseover', "getZoneStats(event);this.style.cursor='pointer'");
     createSetting('ChangeLog', 'Show Changelog', '(Action Button). Shows the changelog popup message that AT loads on startup again, in case you missed it. The blue color means this is not a settable setting, just a button.', 'action', 'printChangelog()', null, 'Display');
-    document.getElementById('Display').lastChild.insertAdjacentHTML('afterend','<br>');
+    document.getElementById('Display').lastChild.insertAdjacentHTML('afterend', '<br>');
 
-//SPAM settings:  
+    //SPAM settings:  
     //Subsection2Line1
     createSetting('SpamGeneral', 'General Spam', 'General Spam = Notification Messages, Auto He/Hr', 'boolean', true, null, 'Display');
     createSetting('SpamUpgrades', 'Upgrades Spam', 'Upgrades Spam', 'boolean', true, null, 'Display');
@@ -470,8 +470,8 @@ function initializeAllSettings() {
     createSetting('SpamPerks', 'AutoPerks Spam', 'Everything in related to AutoPerks', 'boolean', true, null, 'Display');
 
 
-    
-// Export/Import/Default settings
+
+    // Export/Import/Default settings
     createSetting('ImportAutoTrimps', 'Import AutoTrimps', 'Import your AutoTrimps Settings. Asks you to name it as a profile afterwards.', 'infoclick', 'ImportAutoTrimps', null, 'Import Export');
     createSetting('ExportAutoTrimps', 'Export AutoTrimps', 'Export your AutoTrimps Settings as a output string text formatted in JSON.', 'infoclick', 'ExportAutoTrimps', null, 'Import Export');
     createSetting('DefaultAutoTrimps', 'Reset to Default', 'Reset everything to the way it was when you first installed the script. ', 'infoclick', 'ResetDefaultSettingsProfiles', null, 'Import Export');
@@ -481,7 +481,7 @@ function initializeAllSettings() {
     //createSetting('ExportModuleVars', 'Export Custom Variables', 'Export your custom MODULES variables.', 'infoclick', 'ExportModuleVars', null, 'Import Export');
     //createSetting('ImportModuleVars', 'Import Custom Variables', 'Import your custom MODULES variables (and save).', 'infoclick', 'ImportModuleVars', null, 'Import Export');
     //createSetting('ResetModuleVars', 'Reset Custom Variables', 'Reset(Delete) your custom MODULES variables, and return the script to normal. ', 'infoclick', 'ResetModuleVars', null, 'Import Export');
-    
+
     //createSetting('PlayerLevel', 'PlayerLevel', 'PlayerLevel: Indicate around what level you are. noob, low, medium, high, spire, magma, expert, z450+, z500+, endgame and so on. Might be used to control which settings are visible in the future. ', 'dropdown', "Medium", ["Noob","Low","Medium","High","Spire","Magma","Expert","z450+","z500+","EndGame"], 'Display');
     /*
     createSetting('ATModuleListDropdown', 'Modules', 'AT Module List Dropdown: Lists all the individual modules (.js files) that have been auto-loaded. It might be possible to unload these or something in the future.', 'dropdown', ATmoduleList[0], ATmoduleList, 'Import Export');
@@ -533,7 +533,7 @@ function createSetting(id, name, description, type, defaultValue, list, containe
             };
         btn.setAttribute("style", "font-size: 1.1vw;");
         btn.setAttribute('class', 'noselect settingsBtn btn-info');
-        btn.setAttribute("onclick", 'autoSetValueToolTip("' + id + '", "' + name + '",'+`${(type == 'valueNegative')}`+')');
+        btn.setAttribute("onclick", 'autoSetValueToolTip("' + id + '", "' + name + '",' + `${(type == 'valueNegative')}` + ')');
         btn.setAttribute("onmouseover", 'tooltip(\"' + name + '\", \"customText\", event, \"' + description + '\")');
         btn.setAttribute("onmouseout", 'tooltip("hide")');
         btn.textContent = name;
@@ -606,8 +606,7 @@ function createSetting(id, name, description, type, defaultValue, list, containe
         if (container) document.getElementById(container).appendChild(btnParent);
         else document.getElementById("autoSettings").appendChild(btnParent);
     }
-    else if(type === 'action')
-    {
+    else if (type === 'action') {
         //We're not storing the state on these.
         btn.setAttribute("style", "font-size: 1.1vw;");
         btn.setAttribute('class', 'noselect settingsBtn settingBtn3');  //color 3 is teal.
@@ -659,7 +658,7 @@ function settingChanged(id) {
         //puts a 5 second pause in between cycling through from "on portal" to "always" so you can switch it to "off".
         if (id == 'AutoMagmiteSpender2' && btn.value == 1) {
             magmiteSpenderChanged = true;
-            setTimeout(function() {
+            setTimeout(function () {
                 magmiteSpenderChanged = false;
             }, 5000);
         }
@@ -684,7 +683,7 @@ function settingChanged(id) {
 }
 
 //Popup Tooltip - ask them to enter some numerical input. (STANDARDIZED)
-function autoSetValueToolTip(id, text,negative) {
+function autoSetValueToolTip(id, text, negative) {
     ranstring = text;
     var elem = document.getElementById("tooltipDiv");
     var tooltipText = 'Type a number below. You can also use shorthand such as 2e5 or 200k.';
@@ -692,8 +691,8 @@ function autoSetValueToolTip(id, text,negative) {
         tooltipText += 'Accepts negative numbers as validated inputs.';
     else
         tooltipText += 'Put -1 for Infinite.';
-    tooltipText += '<br/><br/><input id="customNumberBox" style="width: 50%" onkeypress="onKeyPressSetting(event, \'' + id + '\','+negative+')" value=' + autoTrimpSettings[id].value + '></input>';
-    var costText = '<div class="maxCenter"><div class="btn btn-info" onclick="autoSetValue(\'' + id + '\','+negative+')">Apply</div><div class="btn btn-info" onclick="cancelTooltip()">Cancel</div></div>';
+    tooltipText += '<br/><br/><input id="customNumberBox" style="width: 50%" onkeypress="onKeyPressSetting(event, \'' + id + '\',' + negative + ')" value=' + autoTrimpSettings[id].value + '></input>';
+    var costText = '<div class="maxCenter"><div class="btn btn-info" onclick="autoSetValue(\'' + id + '\',' + negative + ')">Apply</div><div class="btn btn-info" onclick="cancelTooltip()">Cancel</div></div>';
     game.global.lockTooltip = true;
     elem.style.left = '32.5%';
     elem.style.top = '25%';
@@ -710,13 +709,13 @@ function autoSetValueToolTip(id, text,negative) {
     box.focus();
 }
 //Keyboard handler - Enter Key accepts popup
-function onKeyPressSetting(event, id,negative) {
+function onKeyPressSetting(event, id, negative) {
     if (event.which == 13 || event.keyCode == 13) {
-        autoSetValue(id,negative);
+        autoSetValue(id, negative);
     }
 }
 //Custom Number Box - Suffix handler for numerical to string values in the prompted popup
-function autoSetValue(id,negative) {
+function autoSetValue(id, negative) {
     var num = 0;
     unlockTooltip();
     tooltip('hide');
@@ -834,7 +833,7 @@ function updateCustomButtons() {
     //if HeHr is not selected, remove HeHr buffer settingsbox
     (heHr) ? turnOn("HeliumHrBuffer") : turnOff("HeliumHrBuffer");
     //if ShieldBlock is for sure, remove ShieldBlock from settingsbox (achievement=12 means z100).
-    (game.achievements.zones.finished < 12) ? turnOn("BuyShieldblock") : function(){turnOff("BuyShieldblock");setPageSetting("BuyShieldblock",false);}();
+    (game.achievements.zones.finished < 12) ? turnOn("BuyShieldblock") : function () { turnOff("BuyShieldblock"); setPageSetting("BuyShieldblock", false); }();
 
     //DROPDOWNS: updates dropdown selections. (ALL DROPDOWNS REQUIRE THIS BIT TO BE UPDATEY)
     //todo check why this isnt possible to set automatically in the dropdown code.
@@ -875,9 +874,9 @@ function updateCustomButtons() {
         autoTrimpSettings.Prestige.selected = "Bestplate";
     }
     //Bionic Before Spire - Auto turns on ability to run UniqueMaps
-    if (autoTrimpSettings.RunBionicBeforeSpire.enabled && getPageSetting('AutoMaps')==2) {
+    if (autoTrimpSettings.RunBionicBeforeSpire.enabled && getPageSetting('AutoMaps') == 2) {
         debug("RunBionicBeforeSpire incompatible with AutoMaps No Unique Maps, changing...");
-        setPageSetting("AutoMaps",1);
+        setPageSetting("AutoMaps", 1);
     }
     //since this is a loop, make sure the Text contents of our buttons are set accurately. (after any setPageSetting)
     for (var setting in autoTrimpSettings) {
@@ -917,19 +916,19 @@ function getDailyHeHrStats() {
     if (game.global.challengeActive == "Daily") {
         var getPercent = (game.stats.heliumHour.value() / (game.global.totalHeliumEarned - (game.global.heliumLeftover + game.resources.helium.owned)));
         getPercent *= 100 + getDailyHeliumValue(countDailyWeight());
-        words = "<b>After Daily He/Hr: " + getPercent.toFixed(3) +'%';
+        words = "<b>After Daily He/Hr: " + getPercent.toFixed(3) + '%';
     }
     return words;
 }
 
 //Part of import-export.js module.
-function settingsProfileMakeGUI(){};    //blank on purpose, will be overwritten if necessary.
+function settingsProfileMakeGUI() { };    //blank on purpose, will be overwritten if necessary.
 
 //controls the button skips 2 of the tri-state automaps button
-function toggleAutoMaps(){ 
-  if (getPageSetting('AutoMaps'))
-    setPageSetting('AutoMaps',0);
-  else
-    setPageSetting('AutoMaps',1);
-  document.getElementById("autoMapBtn").setAttribute("class", "noselect settingsBtn settingBtn" + autoTrimpSettings.AutoMaps.value);
+function toggleAutoMaps() {
+    if (getPageSetting('AutoMaps'))
+        setPageSetting('AutoMaps', 0);
+    else
+        setPageSetting('AutoMaps', 1);
+    document.getElementById("autoMapBtn").setAttribute("class", "noselect settingsBtn settingBtn" + autoTrimpSettings.AutoMaps.value);
 }
